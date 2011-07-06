@@ -3,3 +3,4 @@ doc/*
 pkg/*
 test/repo
 html/*
+*.gem
