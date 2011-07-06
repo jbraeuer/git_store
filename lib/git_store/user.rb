@@ -17,16 +17,10 @@ class GitStore
     def self.config_get(key)
       value = `git config #{key}`.chomp
 
-      if $?.exitstatus == 0
-        return value unless value.empty?
-        raise RuntimError, "#{key} is empty"
-      else
-        raise RuntimError, "No #{key} found in git config"
+      if $?.exitstatus != 0 or value.empty?
+        return key
       end
-    end
-
-    def self.config_user_email
-      email = `git config user.email`.chomp
+      value
     end
 
     def self.parse(user)
